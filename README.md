@@ -4,7 +4,7 @@
 
 This repository is a public research scaffold derived from the broader SceneScoutAI concept: using AI to understand video archives, map scripts to visual beats, and support responsible generative media workflows.
 
-SceneScoutAI itself is being developed as a hosted commercial product. This open-source toolkit focuses only on the research layer: metadata schemas, example workflows, prompt structures, sample scripts, and reference patterns for combining video archive intelligence with generative media infrastructure such as fal.
+This open research toolkit focuses on metadata schemas, example workflows, prompt structures, sample scripts, and reference patterns for combining video archive intelligence with generative media infrastructure such as fal.
 
 ## Why this exists
 
