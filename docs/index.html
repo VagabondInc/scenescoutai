@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SceneScoutAI Open Research Toolkit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Archive-aware AI research toolkit for newsroom video metadata, script-to-package workflows, and responsible generative media planning.">
+  <style>
+    :root {
+      --ink: #10151f;
+      --muted: #5b6472;
+      --paper: #f5f6f8;
+      --card: #ffffff;
+      --red: #c41230;
+      --blue: #0a3d91;
+      --deep-blue: #08285f;
+      --yellow: #ffcc33;
+      --line: #d9dee8;
+      --shadow: 0 18px 50px rgba(8, 40, 95, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, #eef2f7 0%, #f8f9fb 45%, #ffffff 100%);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      background: var(--deep-blue);
+      color: white;
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .breaking {
+      background: var(--red);
+      color: white;
+      padding: 10px 20px;
+      font-weight: 800;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      align-items: center;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    .breaking span {
+      background: white;
+      color: var(--red);
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .masthead {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 22px 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+    }
+
+    .brand-kicker {
+      color: var(--red);
+      font-weight: 900;
+      letter-spacing: .08em;
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--deep-blue);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 7vw, 76px);
+      letter-spacing: -0.055em;
+      line-height: .9;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 8px;
+      max-width: 680px;
+      line-height: 1.45;
+    }
+
+    .live-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      min-width: 220px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.04);
+    }
+
+    .live-box strong {
+      display: block;
+      color: var(--red);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 5px;
+    }
+
+    .live-box p {
+      margin: 0;
+      font-weight: 700;
+      color: var(--deep-blue);
+      line-height: 1.3;
+    }
+
+    nav {
+      border-top: 1px solid var(--line);
+      background: #fbfcff;
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 22px;
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--deep-blue);
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 28px auto;
+      padding: 0 22px;
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 24px;
+    }
+
+    .lead-story {
+      background: var(--card);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+
+    .hero-image {
+      min-height: 280px;
+      background:
+        linear-gradient(135deg, rgba(10,61,145,.92), rgba(196,18,48,.78)),
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.35), transparent 28%),
+        linear-gradient(90deg, #1b2d4e, #0a3d91);
+      color: white;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 38px;
+      position: relative;
+    }
+
+    .hero-image:before {
+      content: "LIVE";
+      position: absolute;
+      left: 22px;
+      top: 20px;
+      background: var(--red);
+      color: white;
+      font-weight: 900;
+      padding: 7px 11px;
+      border-radius: 5px;
+      letter-spacing: .07em;
+      font-size: 13px;
+    }
+
+    .hero-image:after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 58px;
+      background: linear-gradient(90deg, var(--deep-blue), var(--red));
+    }
+
+    .hero-image h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: .95;
+      letter-spacing: -0.05em;
+      margin: 0;
+      max-width: 720px;
+      position: relative;
+      z-index: 2;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .lead-copy {
+      padding: 28px;
+    }
+
+    .section-label {
+      color: var(--red);
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .lead-copy p {
+      font-size: 19px;
+      line-height: 1.55;
+      margin: 0 0 18px;
+      color: #273142;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+
+    .button.primary {
+      background: var(--red);
+      color: white;
+    }
+
+    .button.secondary {
+      background: var(--deep-blue);
+      color: white;
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 12px 28px rgba(0,0,0,.06);
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      color: var(--deep-blue);
+      font-size: 22px;
+      letter-spacing: -.02em;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .rundown {
+      border-left: 5px solid var(--yellow);
+    }
+
+    .ticker {
+      background: #111827;
+      color: white;
+      padding: 12px 0;
+      overflow: hidden;
+      border-top: 4px solid var(--yellow);
+      border-bottom: 4px solid var(--yellow);
+    }
+
+    .ticker-track {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 34px auto;
+      padding: 0 22px 60px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .story-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 26px rgba(0,0,0,.06);
+    }
+
+    .story-thumb {
+      height: 112px;
+      background:
+        linear-gradient(135deg, rgba(10,61,145,.92), rgba(8,40,95,.75)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,.18) 0 8px, transparent 8px 16px);
+      border-bottom: 5px solid var(--red);
+    }
+
+    .story-card:nth-child(2) .story-thumb {
+      background:
+        linear-gradient(135deg, rgba(196,18,48,.90), rgba(8,40,95,.72)),
+        radial-gradient(circle at 70% 20%, rgba(255,204,51,.75), transparent 24%);
+    }
+
+    .story-card:nth-child(3) .story-thumb {
+      background:
+        linear-gradient(135deg, rgba(17,24,39,.92), rgba(10,61,145,.70)),
+        linear-gradient(90deg, transparent 48%, rgba(255,255,255,.2) 48% 52%, transparent 52%);
+    }
+
+    .story-body {
+      padding: 20px;
+    }
+
+    .story-body h3 {
+      margin: 0 0 8px;
+      color: var(--deep-blue);
+      font-size: 21px;
+      line-height: 1.1;
+    }
+
+    .story-body p {
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .workflow {
+      margin-top: 44px;
+      background: var(--deep-blue);
+      color: white;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .workflow h2 {
+      margin: 0 0 14px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      letter-spacing: -.04em;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .step {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .step strong {
+      color: var(--yellow);
+      display: block;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 7px;
+    }
+
+    .step span {
+      line-height: 1.35;
+      display: block;
+      font-weight: 700;
+    }
+
+    .docs-list {
+      margin-top: 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .doc-link {
+      display: block;
+      text-decoration: none;
+      background: white;
+      border: 1px solid var(--line);
+      border-left: 7px solid var(--red);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.05);
+    }
+
+    .doc-link strong {
+      display: block;
+      color: var(--deep-blue);
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .doc-link span {
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    footer {
+      background: #081b3f;
+      color: white;
+      padding: 32px 22px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer p {
+      margin: 6px 0;
+      color: rgba(255,255,255,.75);
+    }
+
+    @media (max-width: 850px) {
+      .masthead,
+      .hero,
+      .grid,
+      .docs-list {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .live-box {
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div>Archive Intelligence</div>
+    <div>Script-to-Package Research</div>
+    <div>Responsible Generative Media</div>
+  </div>
+
+  <div class="breaking">
+    <span>Research Desk</span>
+    AI workflows for faster, safer newsroom visual planning
+  </div>
+
+  <header>
+    <section class="masthead">
+      <div>
+        <div class="brand-kicker">SceneScoutAI</div>
+        <h1>Open Research Toolkit</h1>
+        <div class="tagline">
+          Archive-aware AI scaffolding for turning newsroom video metadata and scripts into structured visual package plans.
+        </div>
+      </div>
+
+      <aside class="live-box">
+        <strong>Now developing</strong>
+        <p>Video metadata → visual beats → archive matches → generation prompts</p>
+      </aside>
+    </section>
+
+    <nav>
+      <div class="nav-inner">
+        <a href="architecture.html">Architecture</a>
+        <a href="workflow.html">Workflow</a>
+        <a href="responsible-ai.html">Responsible AI</a>
+        <a href="../schemas/video_asset.schema.json">Metadata Schema</a>
+        <a href="https://github.com/VagabondInc/scenescoutai">GitHub Repo</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <article class="lead-story">
+      <div class="hero-image">
+        <h2>What if every newsroom archive could help build tomorrow’s package?</h2>
+      </div>
+
+      <div class="lead-copy">
+        <div class="section-label">Lead Story</div>
+        <p>
+          Newsrooms have years of valuable footage, but too much of it is buried in folders,
+          drives, transcripts, exports, and half-labeled archives.
+        </p>
+        <p>
+          This toolkit explores how AI-analyzed video metadata can help producers turn a
+          script into visual beats, match existing archive footage, and create responsible
+          prompt candidates when coverage is missing.
+        </p>
+
+        <div class="button-row">
+          <a class="button primary" href="workflow.html">View Workflow</a>
+          <a class="button secondary" href="architecture.html">See Architecture</a>
+        </div>
+      </div>
+    </article>
+
+    <aside class="side-stack">
+      <div class="panel rundown">
+        <div class="section-label">Producer Rundown</div>
+        <h3>Script in. Visual plan out.</h3>
+        <p>
+          A sample script becomes a structured package plan with visual intent,
+          archive matches, editorial notes, and generated prompt candidates.
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="section-label">Field Notes</div>
+        <h3>Built for human review.</h3>
+        <p>
+          The toolkit assumes editorial oversight. Generated media is treated as a draft,
+          not a replacement for reporting, verification, or consent.
+        </p>
+      </div>
+
+      <div class="panel">
+        <div class="section-label">Archive Desk</div>
+        <h3>Metadata is the assignment editor.</h3>
+        <p>
+          Detected scenes, objects, transcripts, locations, rights, and editorial tags
+          help decide what footage fits the story.
+        </p>
+      </div>
+    </aside>
+  </section>
+
+  <div class="ticker">
+    <div class="ticker-track">
+      DEVELOPING: metadata schemas • script parsing • archive matching • fal-ready prompt templates • responsible AI package planning
+    </div>
+  </div>
+
+  <main>
+    <div class="section-label">Top Stories</div>
+    <div class="grid">
+      <article class="story-card">
+        <div class="story-thumb"></div>
+        <div class="story-body">
+          <h3>Archive-aware production</h3>
+          <p>
+            Use structured footage metadata to surface relevant clips before generating anything new.
+          </p>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <div class="story-thumb"></div>
+        <div class="story-body">
+          <h3>Script-to-visual beats</h3>
+          <p>
+            Break anchor intros, reporter tracks, and tags into clear visual production needs.
+          </p>
+        </div>
+      </article>
+
+      <article class="story-card">
+        <div class="story-thumb"></div>
+        <div class="story-body">
+          <h3>Controlled generation prompts</h3>
+          <p>
+            Create prompt candidates for missing visuals while keeping privacy, rights, and editorial context intact.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <section class="workflow">
+      <h2>The newsroom workflow</h2>
+      <p>
+        This open scaffold models a practical path from script to production plan.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <strong>Step 01</strong>
+          <span>Analyze the script</span>
+        </div>
+        <div class="step">
+          <strong>Step 02</strong>
+          <span>Create visual beats</span>
+        </div>
+        <div class="step">
+          <strong>Step 03</strong>
+          <span>Search archive metadata</span>
+        </div>
+        <div class="step">
+          <strong>Step 04</strong>
+          <span>Generate missing prompt drafts</span>
+        </div>
+        <div class="step">
+          <strong>Step 05</strong>
+          <span>Review package plan</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-list">
+      <a class="doc-link" href="architecture.html">
+        <strong>Architecture</strong>
+        <span>Understand the system model behind script parsing, archive search, and package planning.</span>
+      </a>
+
+      <a class="doc-link" href="workflow.html">
+        <strong>Workflow</strong>
+        <span>Follow the demo path from sample script to structured JSON output.</span>
+      </a>
+
+      <a class="doc-link" href="responsible-ai.html">
+        <strong>Responsible AI</strong>
+        <span>Review editorial safety principles for generated visuals, likenesses, and synthetic footage.</span>
+      </a>
+
+      <a class="doc-link" href="https://github.com/VagabondInc/scenescoutai">
+        <strong>Repository</strong>
+        <span>Browse schemas, examples, prompt templates, workflows, and starter code.</span>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <strong>SceneScoutAI Open Research Toolkit</strong>
+    <p>Archive-aware generative media research for newsroom workflows.</p>
+  </footer>
+</body>
+</html>
