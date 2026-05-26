@@ -1,0 +1,64 @@
+# Directory Structure
+
+```text
+scenescoutai-open-research-toolkit/
+  .env.example
+  .gitignore
+  CODE_OF_CONDUCT.md
+  COMMERCIAL_BOUNDARY.md
+  CONTRIBUTING.md
+  GOVERNANCE.md
+  LICENSE
+  NOTICE
+  README.md
+  SECURITY.md
+  _config.yml
+  pyproject.toml
+  requirements.txt
+  .github/
+    ISSUE_TEMPLATE/
+      bug_report.md
+      feature_request.md
+    workflows/
+      validate.yml
+  docs/
+    architecture.md
+    commercial-boundary.md
+    grant-positioning.md
+    index.md
+    responsible-ai.md
+    workflow.md
+  wiki/
+    FAQ.md
+    Home.md
+    Metadata-Schema-Guide.md
+    Open-Source-Boundary.md
+    Project-Overview.md
+    Responsible-AI-Guidelines.md
+    Roadmap.md
+    fal-Workflow-Ideas.md
+  schemas/
+    package_plan.schema.json
+    video_asset.schema.json
+  examples/
+    scripts/
+      sample_local_news_script.md
+    metadata/
+      sample_video_archive.json
+    workflows/
+      archive_aware_package.workflow.yaml
+      demo_script_to_package.py
+    prompts/
+      fal_prompt_templates.yaml
+    output/
+      .gitkeep
+  src/
+    scenescout_research/
+      __init__.py
+      package_planner.py
+  tests/
+    test_package_planner.py
+  site/
+    index.html
+    assets/
+```

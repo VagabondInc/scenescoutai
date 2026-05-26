@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SceneScoutAI Video Asset Metadata",
+  "type": "object",
+  "required": [
+    "asset_id",
+    "title",
+    "duration_seconds",
+    "source_type",
+    "detected_scenes",
+    "transcript"
+  ],
+  "properties": {
+    "asset_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "archive",
+        "field_footage",
+        "interview",
+        "anchor_segment",
+        "generated_demo",
+        "public_sample"
+      ]
+    },
+    "duration_seconds": {
+      "type": "number"
+    },
+    "date_recorded": {
+      "type": "string"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      }
+    },
+    "detected_objects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "detected_scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "start",
+          "end",
+          "description"
+        ],
+        "properties": {
+          "start": {
+            "type": "number"
+          },
+          "end": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "transcript": {
+      "type": "string"
+    },
+    "rights": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "string"
+        },
+        "restrictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "editorial_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

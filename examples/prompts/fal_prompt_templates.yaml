@@ -1,0 +1,30 @@
+# fal prompt templates for archive-aware newsroom generation.
+# These are examples only. Review outputs before publication.
+
+broll_contextual:
+  description: Generate controlled B-roll draft when archive footage is unavailable.
+  template: >
+    Generate realistic newsroom-style B-roll for a local news package.
+    Story context: {story_context}
+    Visual beat: {visual_intent}
+    Location style: {location_style}
+    Archive reference tags: {archive_tags}
+    Avoid showing identifiable real people unless explicitly authorized.
+    Avoid logos, private addresses, license plates, and misleading emergency imagery.
+
+anchor_avatar_draft:
+  description: Generate an internal draft anchor segment only when likeness permissions exist.
+  template: >
+    Create an internal-use anchor segment draft.
+    Anchor profile: {anchor_profile}
+    Script line: {script_text}
+    Tone: clear, professional, local newsroom.
+    This output is for editorial review only and requires explicit approval before publication.
+
+archive_style_reference:
+  description: Use archive metadata to guide generation style.
+  template: >
+    Match the tone of a local broadcast news package.
+    Use the following archive metadata as visual guidance:
+    {archive_metadata}
+    Generate a prompt plan, not final footage.

@@ -1,0 +1,92 @@
+[
+  {
+    "asset_id": "archive-001",
+    "title": "Exterior of Community Center During Summer",
+    "source_type": "archive",
+    "duration_seconds": 42,
+    "date_recorded": "2025-07-14",
+    "location": {
+      "city": "Fresno",
+      "state": "CA",
+      "country": "USA"
+    },
+    "detected_objects": [
+      "building",
+      "parking lot",
+      "sunlight",
+      "people walking"
+    ],
+    "detected_scenes": [
+      {
+        "start": 0,
+        "end": 12,
+        "description": "Wide exterior of community center in bright afternoon sun.",
+        "confidence": 0.91
+      },
+      {
+        "start": 12,
+        "end": 31,
+        "description": "People entering public building with bags and water bottles.",
+        "confidence": 0.87
+      },
+      {
+        "start": 31,
+        "end": 42,
+        "description": "Close-up of posted public notice near entrance.",
+        "confidence": 0.79
+      }
+    ],
+    "transcript": "",
+    "rights": {
+      "owner": "Sample Archive",
+      "usage": "demo only",
+      "restrictions": [
+        "synthetic sample metadata"
+      ]
+    },
+    "editorial_tags": [
+      "heat",
+      "community center",
+      "public safety",
+      "weather"
+    ]
+  },
+  {
+    "asset_id": "archive-002",
+    "title": "Public Health Official Interview",
+    "source_type": "interview",
+    "duration_seconds": 88,
+    "date_recorded": "2025-07-15",
+    "location": {
+      "city": "Fresno",
+      "state": "CA",
+      "country": "USA"
+    },
+    "detected_objects": [
+      "microphone",
+      "official",
+      "podium"
+    ],
+    "detected_scenes": [
+      {
+        "start": 0,
+        "end": 88,
+        "description": "Public health official speaking at podium.",
+        "confidence": 0.93
+      }
+    ],
+    "transcript": "We are asking residents to check on seniors, outdoor workers, and anyone without reliable air conditioning.",
+    "rights": {
+      "owner": "Sample Archive",
+      "usage": "demo only",
+      "restrictions": [
+        "synthetic sample metadata"
+      ]
+    },
+    "editorial_tags": [
+      "public health",
+      "heat safety",
+      "interview"
+    ]
+  }
+]

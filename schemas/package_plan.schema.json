@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SceneScoutAI News Package Plan",
+  "type": "object",
+  "required": [
+    "package_id",
+    "title",
+    "visual_beats"
+  ],
+  "properties": {
+    "package_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "script_source": {
+      "type": "string"
+    },
+    "visual_beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "beat_id",
+          "script_text",
+          "visual_intent"
+        ],
+        "properties": {
+          "beat_id": {
+            "type": "string"
+          },
+          "script_text": {
+            "type": "string"
+          },
+          "visual_intent": {
+            "type": "string"
+          },
+          "archive_matches": {
+            "type": "array"
+          },
+          "generation_prompts": {
+            "type": "array"
+          },
+          "editorial_notes": {
+            "type": "array"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+[project]
+name = "scenescoutai-open-research-toolkit"
+version = "0.1.0"
+description = "Archive-aware generative media workflow scaffold for newsroom and production research."
+authors = [{ name = "Justin Moore" }]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

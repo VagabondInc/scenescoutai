@@ -1,0 +1,35 @@
+name: archive-aware-news-package-demo
+version: 0.1.0
+description: Demo workflow for transforming a news script into a visual package plan.
+
+inputs:
+  - name: script
+    type: markdown
+  - name: archive_metadata
+    type: json
+
+steps:
+  - id: parse_script
+    description: Split script into anchor intro, reporter tracks, and anchor tag.
+
+  - id: create_visual_beats
+    description: Convert script sections into visual intentions.
+
+  - id: match_archive
+    description: Search archive metadata for relevant footage candidates.
+
+  - id: identify_visual_gaps
+    description: Find beats without strong archive matches.
+
+  - id: generate_fal_prompt_candidates
+    description: Create fal-compatible prompt candidates for missing B-roll or draft visuals.
+
+  - id: produce_package_plan
+    description: Output structured JSON for editor review.
+
+outputs:
+  - name: package_plan
+    type: json
+
+human_review_required: true
+publication_allowed_without_review: false
