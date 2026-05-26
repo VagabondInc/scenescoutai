@@ -20,4 +20,3 @@ This toolkit explores how AI-analyzed video archive metadata can help newsroom a
 - [Workflow](workflow.md)
 - [Responsible AI](responsible-ai.md)
 - [Commercial Boundary](commercial-boundary.md)
-- [Grant Positioning](grant-positioning.md)
